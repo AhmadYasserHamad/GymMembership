@@ -11,12 +11,16 @@ import java.io.*;
  *
  * @author ahmadyasserhamad
  */
-public class TrainerDatabase extends Database{
+public class TrainerDatabase extends Database {
 
     private ArrayList<Trainer> records = new ArrayList();
 
     public TrainerDatabase(String filename) {
         super(filename);
+        try {
+            readFromFile();
+        } catch (IOException e) {
+        }
     }
 
     @Override
@@ -65,32 +69,28 @@ public class TrainerDatabase extends Database{
     }
 
     public void insertRecord(Trainer record) {
-        for (Trainer trainer : records) {
-            if (trainer.equals(record)) {
-                System.out.println("Record already exists.");
-                return;
-            }
+        if (contains(record.getSearchKey())) {
+            System.out.println("Trainer record already exists.");
+        } else {
+            records.add(record);
         }
-        records.add(record);
     }
 
     @Override
     public void deleteRecord(String key) {
-        for (Trainer trainer : records) {
-            if (trainer.getSearchKey().equals(key)) {
-                records.remove(trainer);
-                return;
-            }
+        if (contains(key)) {
+            records.remove(getRecord(key));
+        } else {
+            System.out.println("Trainer record does not exist.");
         }
-        System.out.println("No records found matching the key.");
     }
 
     @Override
     public void saveToFile() throws IOException {
-        FileWriter writer = new FileWriter(getFilename(),true);
+        FileWriter writer = new FileWriter(getFilename());
         for (Trainer trainer : records) {
-            writer.write("\r\n");
             writer.write(trainer.lineRepresentation());
+            writer.write("\r\n");
         }
         writer.close();
     }

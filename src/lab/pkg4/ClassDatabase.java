@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package lab.pkg4;
+
 import java.util.*;
 import java.io.*;
 
@@ -10,14 +11,20 @@ import java.io.*;
  *
  * @author ahmadyasserhamad
  */
-public class ClassDatabase extends Database{
-    
-    private ArrayList<Class> records = new ArrayList();;
+public class ClassDatabase extends Database {
+
+    private ArrayList<Class> records = new ArrayList();
+
+    ;
 
     public ClassDatabase(String filename) {
         super(filename);
+        try {
+            readFromFile();
+        } catch (IOException e) {
+        }
     }
-    
+
     @Override
     public void readFromFile() throws FileNotFoundException {
         File file = new File(getFilename());
@@ -51,47 +58,43 @@ public class ClassDatabase extends Database{
         }
         return false;
     }
-    
+
     @Override
-    public Class getRecord(String key){
-        for (Class classInstance : records){
-            if(classInstance.getSearchKey().equals(key)){
+    public Class getRecord(String key) {
+        for (Class classInstance : records) {
+            if (classInstance.getSearchKey().equals(key)) {
                 return classInstance;
             }
         }
         System.out.println("Class does not exist.");
         return null;
     }
-    
+
     public void insertRecord(Class record) {
-        for (Class classInstance : records) {
-            if (classInstance.equals(record)) {
-                System.out.println("Record already exists.");
-                return;
-            }
+        if (contains(record.getSearchKey())) {
+            System.out.println("Class record already exists.");
+        } else {
+            records.add(record);
         }
-        records.add(record);
     }
 
     @Override
     public void deleteRecord(String key) {
-        for (Class classInstance : records) {
-            if (classInstance.getSearchKey().equals(key)) {
-                records.remove(classInstance);
-                return;
-            }
+        if (contains(key)) {
+            records.remove(getRecord(key));
+        } else {
+            System.out.println("Class record does not exist.");
         }
-        System.out.println("No records found matching the key.");
     }
 
     @Override
     public void saveToFile() throws IOException {
-        FileWriter writer = new FileWriter(getFilename(), true);
+        FileWriter writer = new FileWriter(getFilename());
         for (Class classInstance : records) {
-            writer.write("\r\n");
             writer.write(classInstance.lineRepresentation());
+            writer.write("\r\n");
         }
         writer.close();
     }
-    
+
 }

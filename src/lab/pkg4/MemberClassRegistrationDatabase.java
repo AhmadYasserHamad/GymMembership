@@ -12,12 +12,16 @@ import java.time.*;
  *
  * @author ahmadyasserhamad
  */
-public class MemberClassRegistrationDatabase extends Database{
+public class MemberClassRegistrationDatabase extends Database {
 
     private ArrayList<MemberClassRegistration> records = new ArrayList();
 
     public MemberClassRegistrationDatabase(String filename) {
         super(filename);
+        try {
+            readFromFile();
+        } catch (IOException e) {
+        }
     }
 
     @Override
@@ -66,32 +70,28 @@ public class MemberClassRegistrationDatabase extends Database{
     }
 
     public void insertRecord(MemberClassRegistration record) {
-        for (MemberClassRegistration registration : records) {
-            if (registration.equals(record)) {
-                System.out.println("Record already exists.");
-                return;
-            }
+        if (contains(record.getSearchKey())) {
+            System.out.println("Member's class registration record already exists.");
+        } else {
+            records.add(record);
         }
-        records.add(record);
     }
 
     @Override
     public void deleteRecord(String key) {
-        for (MemberClassRegistration registration : records) {
-            if (registration.getSearchKey().equals(key)) {
-                records.remove(registration);
-                return;
-            }
+        if (contains(key)) {
+            records.remove(getRecord(key));
+        } else {
+            System.out.println("Member's class registration record does not exist.");
         }
-        System.out.println("No records found matching the key.");
     }
 
     @Override
     public void saveToFile() throws IOException {
-        FileWriter writer = new FileWriter(getFilename(), true);
+        FileWriter writer = new FileWriter(getFilename());
         for (MemberClassRegistration registration : records) {
-            writer.write("\r\n");
             writer.write(registration.lineRepresentation());
+            writer.write("\r\n");
         }
         writer.close();
     }

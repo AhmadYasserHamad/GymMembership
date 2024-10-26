@@ -11,12 +11,16 @@ import java.io.*;
  *
  * @author ahmadyasserhamad
  */
-public class MemberDatabase extends Database{
+public class MemberDatabase extends Database {
 
     private ArrayList<Member> records = new ArrayList();
 
     public MemberDatabase(String filename) {
         super(filename);
+        try {
+            readFromFile();
+        } catch (IOException e) {
+        }
     }
 
     @Override
@@ -65,32 +69,28 @@ public class MemberDatabase extends Database{
     }
 
     public void insertRecord(Member record) {
-        for (Member member : records) {
-            if (member.equals(record)) {
-                System.out.println("Record already exists.");
-                return;
-            }
+        if (contains(record.getSearchKey())) {
+            System.out.println("Member record already exists.");
+        } else {
+            records.add(record);
         }
-        records.add(record);
     }
 
     @Override
     public void deleteRecord(String key) {
-        for (Member member : records) {
-            if (member.getSearchKey().equals(key)) {
-                records.remove(member);
-                return;
-            }
+        if (contains(key)) {
+            records.remove(getRecord(key));
+        } else {
+            System.out.println("Member record does not exist.");
         }
-        System.out.println("No records found matching the key.");
     }
 
     @Override
     public void saveToFile() throws IOException {
-        FileWriter writer = new FileWriter(getFilename(), true);
+        FileWriter writer = new FileWriter(getFilename());
         for (Member member : records) {
-            writer.write("\r\n");
             writer.write(member.lineRepresentation());
+            writer.write("\r\n");
         }
         writer.close();
     }
