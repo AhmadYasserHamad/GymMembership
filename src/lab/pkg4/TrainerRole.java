@@ -16,7 +16,7 @@ import java.time.temporal.*;
 public class TrainerRole extends Role{
 
     private MemberDatabase memberDatabase = new MemberDatabase("Members.txt");
-    private ClassDatabase classDatabase = new ClassDatabase("Class.txt");
+    private ClassDatabase classDatabase = new ClassDatabase("Classes.txt");
     private MemberClassRegistrationDatabase registrationDatabase = new MemberClassRegistrationDatabase("Registration.txt");
 
     public void addMember(String memberID, String name, String membershipType, String email, String phoneNumber, String status) {
@@ -47,28 +47,31 @@ public class TrainerRole extends Role{
 
     public boolean registerMemberForClass(String memberID, String classID, LocalDate registrationDate) {
         if (classDatabase.contains(classID) && classDatabase.getRecord(classID).getAvailableSeats() > 0) {
-            MemberClassRegistration newRegistration = new MemberClassRegistration(memberID, classID, "active", registrationDate);
+            registrationDatabase.insertRecord(registrationDatabase.createRecordFrom(memberID + "," + classID + "," + "active" + "," + registrationDate));
             classDatabase.getRecord(classID).setAvailableSeats(classDatabase.getRecord(classID).getAvailableSeats() - 1);
             return true;
         }
         if (!classDatabase.contains(classID)) {
             System.out.println("Class does not exist.");
+            return false;
         }
         if (!(classDatabase.getRecord(classID).getAvailableSeats() > 0)) {
             System.out.println("No seats available in class.");
+            return false;
         }
         return false;
     }
 
     public boolean cancelRegistration(String memberID, String classID) {
         if(registrationDatabase.contains(memberID.concat(classID))){
-            if(ChronoUnit.DAYS.between(LocalDate.now(),registrationDatabase.getRecord(memberID.concat(classID)).getRegistrationDate())>=3){
+            if(ChronoUnit.DAYS.between(LocalDate.now(),registrationDatabase.getRecord(memberID.concat(classID)).getRegistrationDate())<3){
                 registrationDatabase.getRecord(memberID.concat(classID)).setRegistrationStatus("canceled");
                 classDatabase.getRecord(classID).setAvailableSeats(classDatabase.getRecord(classID).getAvailableSeats()+1);
                 System.out.println("Refund issued to member: " + memberID);
                 return true;
             }
             System.out.println("Cannot cancel registration. The class is in the coming three days.");
+            return false;
         }
         System.out.println("Class does not exist.");
         return false;

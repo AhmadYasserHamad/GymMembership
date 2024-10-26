@@ -1,5 +1,0 @@
-
-T1001,  Ibrahim,  Ibrahim@gmail.com,  Fitness,  0102348754
-T1003,  Mostafa,  Mostafa@gmail.com,  Calisthenics,  0102348754
-T1004,  Essam,  Essam@gmail.com,  Aerobics,  0102348754
-T1002, Youssef, youssef@gmail.com, BodyBuilding, 012345678998

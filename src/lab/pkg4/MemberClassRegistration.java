@@ -47,7 +47,7 @@ public class MemberClassRegistration extends BaseClass{
     
     @Override
     public String lineRepresentation() {
-        return memberID.concat(", " + classID + ", " + registrationDate + ", " + status);
+        return memberID + ", " + classID + ", " + registrationDate + ", " + status;
     }
 
 }

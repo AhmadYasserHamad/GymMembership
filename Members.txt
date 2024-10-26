@@ -1,3 +1,0 @@
-M1001, Omar, Premium, Omar@gmail.com, 0102348754, Active
-M1002, Ali, Monthly, Ali@gmail.com, 0102348754, Active
-M1003, Osama, Yearly, Osama@gmail.com, 0102348754, Active

@@ -34,7 +34,7 @@ public class Class extends BaseClass{
 
     @Override
     public String lineRepresentation() {
-        return classID.concat(", " + className + ", " + trainerID + ", " + duration + ", " + availableSeats);
+        return classID + ", " + className + ", " + trainerID + ", " + duration + ", " + availableSeats;
     }
     
     @Override

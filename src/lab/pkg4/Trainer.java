@@ -26,7 +26,7 @@ public class Trainer extends BaseClass{
 
     @Override
     public String lineRepresentation() {
-        return trainerId.concat(", " + name + ", " + email + ", " + speciality + ", " + phoneNumber);
+        return trainerId + ", " + name + ", " + email + ", " + speciality + ", " + phoneNumber;
     }
 
     @Override

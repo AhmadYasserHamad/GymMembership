@@ -28,7 +28,7 @@ public class Member extends BaseClass{
 
     @Override
     public String lineRepresentation() {
-        return memberId.concat(", " + name + ", " + membershipType + ", " + email + ", " + phoneNumber + ", " + status);
+        return memberId + ", " + name + ", " + membershipType + ", " + email + ", " + phoneNumber + ", " + status;
     }
     
     @Override

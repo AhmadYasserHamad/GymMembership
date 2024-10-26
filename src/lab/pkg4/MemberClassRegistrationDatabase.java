@@ -7,6 +7,7 @@ package lab.pkg4;
 import java.util.*;
 import java.io.*;
 import java.time.*;
+import java.time.format.*;
 
 /**
  *
@@ -31,7 +32,7 @@ public class MemberClassRegistrationDatabase extends Database {
         while (fileContent.hasNextLine()) {
             String registration = fileContent.nextLine();
             String[] dividedRegistration = registration.split(",");
-            MemberClassRegistration newRegistration = new MemberClassRegistration(dividedRegistration[0], dividedRegistration[1], dividedRegistration[2], LocalDate.parse(dividedRegistration[3]));
+            MemberClassRegistration newRegistration = new MemberClassRegistration(dividedRegistration[0], dividedRegistration[1], dividedRegistration[2], LocalDate.parse(dividedRegistration[3], DateTimeFormatter.ISO_DATE));
             records.add(newRegistration);
         }
     }
@@ -39,7 +40,7 @@ public class MemberClassRegistrationDatabase extends Database {
     @Override
     public MemberClassRegistration createRecordFrom(String line) {
         String[] dividedLine = line.split(",");
-        MemberClassRegistration newRegistration = new MemberClassRegistration(dividedLine[0], dividedLine[1], dividedLine[2], LocalDate.parse(dividedLine[3]));
+        MemberClassRegistration newRegistration = new MemberClassRegistration(dividedLine[0], dividedLine[1], dividedLine[2], LocalDate.parse(dividedLine[3], DateTimeFormatter.ISO_DATE));
         return newRegistration;
     }
 

@@ -1,3 +1,0 @@
-C101, Bodubuilding, T1001, 60, 19
-C102, Calisthenics, T1002, 15, 2
-C103, Fitness, T1003, 30, 4
