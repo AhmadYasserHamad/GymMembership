@@ -30,7 +30,7 @@ public class Lab4 {
             System.out.println("3. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
-
+            boolean flag = true;
             switch (choice) {
                 case 1:
                     // Admin Menu
@@ -69,11 +69,12 @@ public class Lab4 {
                                 break;
                             case 4:
                                 adminRole.logout();
+                                flag = false;
                                 break;
                             default:
                                 System.out.println("Invalid choice.");
                         }
-                    } while (choice != 4);
+                    } while (choice != 4 && flag == true);
                     break;
 
                 case 2:

@@ -29,8 +29,7 @@ public class TrainerDatabase extends Database {
         Scanner fileContent = new Scanner(file);
         while (fileContent.hasNextLine()) {
             String trainer = fileContent.nextLine();
-            String[] dividedTrainer = trainer.split(",");
-            Trainer newTrainer = new Trainer(dividedTrainer[0], dividedTrainer[1], dividedTrainer[2], dividedTrainer[3], dividedTrainer[4]);
+            Trainer newTrainer = createRecordFrom(trainer);
             records.add(newTrainer);
         }
     }

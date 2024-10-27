@@ -31,8 +31,7 @@ public class ClassDatabase extends Database {
         Scanner fileContent = new Scanner(file);
         while (fileContent.hasNextLine()) {
             String classStr = fileContent.nextLine();
-            String[] dividedClass = classStr.split(",");
-            Class newclass = new Class(dividedClass[0], dividedClass[1], dividedClass[2], Integer.parseInt(dividedClass[3]), Integer.parseInt(dividedClass[4]));
+            Class newclass = createRecordFrom(classStr);
             records.add(newclass);
         }
     }

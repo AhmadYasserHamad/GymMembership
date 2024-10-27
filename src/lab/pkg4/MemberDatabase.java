@@ -28,9 +28,8 @@ public class MemberDatabase extends Database {
         File file = new File(getFilename());
         Scanner fileContent = new Scanner(file);
         while (fileContent.hasNextLine()) {
-            String trainer = fileContent.nextLine();
-            String[] dividedMember = trainer.split(",");
-            Member newMember = new Member(dividedMember[0], dividedMember[1], dividedMember[2], dividedMember[3], dividedMember[4], dividedMember[5]);
+            String member = fileContent.nextLine();
+            Member newMember = createRecordFrom(member);
             records.add(newMember);
         }
     }

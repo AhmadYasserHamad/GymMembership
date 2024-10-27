@@ -31,8 +31,7 @@ public class MemberClassRegistrationDatabase extends Database {
         Scanner fileContent = new Scanner(file);
         while (fileContent.hasNextLine()) {
             String registration = fileContent.nextLine();
-            String[] dividedRegistration = registration.split(",");
-            MemberClassRegistration newRegistration = new MemberClassRegistration(dividedRegistration[0], dividedRegistration[1], dividedRegistration[2], LocalDate.parse(dividedRegistration[3], DateTimeFormatter.ISO_DATE));
+            MemberClassRegistration newRegistration = createRecordFrom(registration);
             records.add(newRegistration);
         }
     }
