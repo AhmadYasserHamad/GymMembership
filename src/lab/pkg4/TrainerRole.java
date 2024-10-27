@@ -47,7 +47,7 @@ public class TrainerRole extends Role{
 
     public boolean registerMemberForClass(String memberID, String classID, LocalDate registrationDate) {
         if (classDatabase.contains(classID) && classDatabase.getRecord(classID).getAvailableSeats() > 0) {
-            registrationDatabase.insertRecord(registrationDatabase.createRecordFrom(memberID + "," + classID + "," + "active" + "," + registrationDate));
+            registrationDatabase.insertRecord(registrationDatabase.createRecordFrom(memberID + ", " + classID + ", " + "active" + ", " + registrationDate));
             classDatabase.getRecord(classID).setAvailableSeats(classDatabase.getRecord(classID).getAvailableSeats() - 1);
             return true;
         }

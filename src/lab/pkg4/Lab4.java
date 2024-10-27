@@ -7,7 +7,6 @@ package lab.pkg4;
 import java.util.*;
 import java.io.*;
 import java.time.*;
-import java.time.format.*;
 
 /**
  *
@@ -137,9 +136,8 @@ public class Lab4 {
                                 String registrationMemberId = scanner.next();
                                 System.out.print("Enter Class ID: ");
                                 String registrationClassId = scanner.next();
-                                scanner.nextLine();
                                 System.out.print("Enter Registration Date (YYYY-MM-DD): ");
-                                LocalDate registrationDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ISO_DATE);
+                                LocalDate registrationDate = LocalDate.parse(scanner.next());
                                 if (trainerRole.registerMemberForClass(registrationMemberId, registrationClassId, registrationDate)) {
                                     System.out.println("Member registered successfully.");
                                 } else {
