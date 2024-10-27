@@ -47,7 +47,7 @@ public class TrainerRole extends Role{
 
     public boolean registerMemberForClass(String memberID, String classID, LocalDate registrationDate) {
         if (classDatabase.contains(classID) && classDatabase.getRecord(classID).getAvailableSeats() > 0) {
-            registrationDatabase.insertRecord(registrationDatabase.createRecordFrom(memberID + ", " + classID + ", " + "active" + ", " + registrationDate));
+            registrationDatabase.insertRecord(registrationDatabase.createRecordFrom(memberID + ", " + classID + ", " + registrationDate + ", " + "active"));
             classDatabase.getRecord(classID).setAvailableSeats(classDatabase.getRecord(classID).getAvailableSeats() - 1);
             return true;
         }
@@ -64,7 +64,8 @@ public class TrainerRole extends Role{
 
     public boolean cancelRegistration(String memberID, String classID) {
         if(registrationDatabase.contains(memberID.concat(classID))){
-            if(ChronoUnit.DAYS.between(LocalDate.now(),registrationDatabase.getRecord(memberID.concat(classID)).getRegistrationDate())<3){
+            long difference = Math.abs(ChronoUnit.DAYS.between(registrationDatabase.getRecord(memberID.concat(classID)).getRegistrationDate(),LocalDate.now()));
+            if(difference<=3){
                 registrationDatabase.getRecord(memberID.concat(classID)).setRegistrationStatus("canceled");
                 classDatabase.getRecord(classID).setAvailableSeats(classDatabase.getRecord(classID).getAvailableSeats()+1);
                 System.out.println("Refund issued to member: " + memberID);

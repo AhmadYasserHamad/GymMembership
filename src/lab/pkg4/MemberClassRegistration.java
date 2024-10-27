@@ -10,18 +10,18 @@ import java.time.*;
  *
  * @author ahmadyasserhamad
  */
-public class MemberClassRegistration extends BaseClass{
+public class MemberClassRegistration extends BaseClass {
 
     private String memberID;
     private String classID;
     private String status;
     private LocalDate registrationDate;
 
-    public MemberClassRegistration(String memberID, String classID, String status, LocalDate registrationDate) {
+    public MemberClassRegistration(String memberID, String classID, LocalDate registrationDate, String status) {
         this.memberID = memberID;
         this.classID = classID;
-        this.status = status;
         this.registrationDate = registrationDate;
+        this.status = status;
     }
 
     public String getMemberID() {
@@ -40,11 +40,11 @@ public class MemberClassRegistration extends BaseClass{
     public String getSearchKey() {
         return memberID.concat(classID);
     }
-    
-    public void setRegistrationStatus(String status){
+
+    public void setRegistrationStatus(String status) {
         this.status = status;
     }
-    
+
     @Override
     public String lineRepresentation() {
         return memberID + ", " + classID + ", " + registrationDate + ", " + status;
