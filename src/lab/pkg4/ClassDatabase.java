@@ -38,7 +38,7 @@ public class ClassDatabase extends Database {
 
     @Override
     public Class createRecordFrom(String line) {
-        String[] dividedLine = line.split(",");
+        String[] dividedLine = line.split(", ");
         Class newClass = new Class(dividedLine[0], dividedLine[1], dividedLine[2], Integer.parseInt(dividedLine[3]), Integer.parseInt(dividedLine[4]));
         return newClass;
     }

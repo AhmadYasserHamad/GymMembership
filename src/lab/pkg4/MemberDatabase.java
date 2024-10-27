@@ -36,7 +36,7 @@ public class MemberDatabase extends Database {
 
     @Override
     public Member createRecordFrom(String line) {
-        String[] dividedLine = line.split(",");
+        String[] dividedLine = line.split(", ");
         Member newMember = new Member(dividedLine[0], dividedLine[1], dividedLine[2], dividedLine[3], dividedLine[4], dividedLine[5]);
         return newMember;
     }

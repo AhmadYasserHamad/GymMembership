@@ -38,7 +38,7 @@ public class MemberClassRegistrationDatabase extends Database {
 
     @Override
     public MemberClassRegistration createRecordFrom(String line) {
-        String[] dividedLine = line.split(",");
+        String[] dividedLine = line.split(", ");
         MemberClassRegistration newRegistration = new MemberClassRegistration(dividedLine[0], dividedLine[1], dividedLine[2], LocalDate.parse(dividedLine[3], DateTimeFormatter.ISO_DATE));
         return newRegistration;
     }

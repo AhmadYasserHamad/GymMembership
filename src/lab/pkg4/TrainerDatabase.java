@@ -36,7 +36,7 @@ public class TrainerDatabase extends Database {
 
     @Override
     public Trainer createRecordFrom(String line) {
-        String[] dividedLine = line.split(",");
+        String[] dividedLine = line.split(", ");
         Trainer newTrainer = new Trainer(dividedLine[0], dividedLine[1], dividedLine[2], dividedLine[3], dividedLine[4]);
         return newTrainer;
     }
